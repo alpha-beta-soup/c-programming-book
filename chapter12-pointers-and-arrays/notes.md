@@ -102,4 +102,56 @@ while (p < &a[N])
 
 ## <a name="array-name-as-pointer"></a>Using an array name as a pointer
 
+**The name of an array can be used as a pointer to the first element in the array.**
+
+```c
+int a[10];
+*a = 7; // Stores 7 in a[0]
+*(a+1) = 12; // Stores 12 in a[1]
+```
+
+- `a+i` is equivalent to `&a[i]` (both point to element `i` of `a`)
+- `*(a+1)` is equivalent to `a[i]` (both represent element `i` itself)
+
+Using this we can simply some loops:
+
+```c
+for (p = &a[0]; p < &a[N]; p++) {
+  sum += *p;
+}
+```
+
+becomes
+
+```c
+for (p = a; p < a + N; p++) {
+  sum += *p;
+}
+```
+
 ## <a name="pointers-and-multidimensional-arrays"></a>Pointers and multidimensional arrays
+
+Of course, pointers can also point to multidimensional arrays. C stores such arrays in row-major order, so all the elements of 0, and then the elements of 1, etc. If we make a pointer to the first element, we can iterate the entire 2D array by incrementing the pointer. This is useful to avoid a nested for loop:
+
+
+```c
+int row, col;
+
+for (row = 0; row < NUM_ROWS; row++) {
+  for (col = 0; col < NUM_COLS; col++) {
+    a[row][col] = 0;
+  }
+}
+```
+
+becomes (exploiting the fact that the array is just stored as a 1D array anyway):
+
+```c
+int *p;
+
+for (p = &a[0][0]; p < &a[NUM_ROWS-1][NUM_COLS-1]; p++) {
+  *p = 0;
+}
+```
+
+However this does hurt program readability and with modern compilers doesn't offer a speed bonus.
