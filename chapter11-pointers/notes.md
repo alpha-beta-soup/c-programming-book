@@ -27,7 +27,7 @@ Given a variable *i*, we can store its address in the pointer variable *p*. Then
 - The name of a pointer variable must be preceded with an asterisk: `int *p;` (a pointer variable capable of pointing to objects of type `int`.)
 - There are no restrictions on what the referenced type may be:
   - `int *p;`
-  - `float*q;`
+  - `float *q;`
   - `char *r;`
 
 ## <a name="operators"></a>The address and indirection operators
