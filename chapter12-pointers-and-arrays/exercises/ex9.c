@@ -3,23 +3,24 @@
 #include <stdio.h>
 #include <ctype.h>
 
-#define MAX 20 // Maximum length of message
+#define MSG_LEN 20 // Maximum length of message
 
-int main(){
-  char a[MAX];
-  char *p;
-  char *q;
-  char ch;
-  p = &a[0];
-  q = p;
+int main(void){
+  char msg[MSG_LEN], ch;
+  char *p = msg;
+  char *q = p;
   printf("Enter a message: ");
-  while ((ch = getchar()) != '\n') {
+  while (p < msg + MSG_LEN) {
+    ch = getchar();
+    if (ch == '\n') {
+      q--;
+      break;
+    }
     if (isalpha(ch)) {
       *q++ = tolower(ch);
     }
   }
-  q--;
-  while (p < q) {
+  while (p <= q) {
     if (!(*p == *q)) {
       printf("Not a palindrome\n");
       return 0;

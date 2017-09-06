@@ -17,7 +17,7 @@ Pointers can also point to array elements, not just ordinary variables.
 
 ```c
 int a[10], *p;
-p = &a[0]
+p = &a[0];
 // p now points to the first element of a
 *p = 5; // equivalent to a[0] = 5
 ```
@@ -155,3 +155,20 @@ for (p = &a[0][0]; p < &a[NUM_ROWS-1][NUM_COLS-1]; p++) {
 ```
 
 However this does hurt program readability and with modern compilers doesn't offer a speed bonus.
+
+### Equivalences
+
+Given:
+```
+int a[N];
+int *p;
+p = a;
+```
+
+Then:
+```
+p == a[0]; // Illegal -- mismatched types
+p == &a[0]; // Legal -- &a[0] == &a[0]
+*p == a[0]; // Legal -- *&a[0] → a[0] == a[0]
+p[0] == a[0]; // Legal -- p[0] → *(p + 0) → *p → *&a[0] → a[0] == a[0]
+```
