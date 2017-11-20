@@ -1,4 +1,4 @@
-# Arrays
+# Chapter 8: Arrays
 
 Scalar vs aggregate variables:
 - scalar: hold a single datum
